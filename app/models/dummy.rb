@@ -1,5 +1,5 @@
 class Dummy < ApplicationRecord
-  def self.addition(a,b)
+  def addition
     a + b
   end
 end
