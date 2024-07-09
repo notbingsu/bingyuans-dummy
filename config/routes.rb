@@ -1,7 +1,7 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
-  mount Sidekiq::Web => '/sidekiq'
   root "home#index"
+  mount Sidekiq::Web => '/sidekiq'
   get 'home/index'
   post 'home/checkName', to: 'home#checkName'
   post 'whatsup', to: 'home#whatsup'
