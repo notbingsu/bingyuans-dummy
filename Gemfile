@@ -10,7 +10,7 @@ gem "sprockets-rails"
 gem "sass-rails"
 gem 'sidekiq'
 # # Use sqlite3 as the database for Active Record
-gem 'pg'
+gem 'pg', '~> 1.5', '>= 1.5.6'
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 
