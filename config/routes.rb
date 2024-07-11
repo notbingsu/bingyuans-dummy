@@ -1,5 +1,12 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
+  post 'start_game', to: 'spyfall#start_game'
+  post 'quit_game', to: 'spyfall#quit_game'
+  post 'make_guess', to: 'spyfall#make_guess'
+  get 'spyfall/index'
+  get 'spyfall/show'
+  get 'spyfall/new'
+  get 'spyfall/create'
   root "home#index"
   mount Sidekiq::Web => '/sidekiq'
   get 'home/index'

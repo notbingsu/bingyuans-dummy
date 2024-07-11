@@ -2,19 +2,5 @@
 <h2>Bingyuan used this to learn some stuff about rails</h2>
 <%= button_to "Hey Whatsup", whatsup_path %>
 <%= link_to "Monitor Jobs", sidekiq_web_path %>
-<%= form_tag(home_checkName_path) do %>
-    <div class="field" style="width:500px;">
-        <%= label_tag :name, "Enter your symptom" %>
-        <%= text_field_tag :name %>
-    </div>
-    <div class="actions">
-        <%= submit_tag "Submit symptom" %>
-    </div>
-<% end %>
-<% if @response %>
-    <div style="background-color:yellow;">
-        <h2>What you should do</h2>
-        <p><%= @response %></p>
-    </div>
-    <%= button_to "RESET", root_path, method: :get %>
-<% end %>
+
+<%= link_to "Spyfallio", spyfall_index_path %>

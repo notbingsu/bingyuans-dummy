@@ -1,0 +1,7 @@
+<div class="grid grid-cols-1 gap-4 content-between" >
+    <%= form_with url: make_guess_path do |f| %>
+        <div style="margin:10px;"><%= f.text_field :guess, placeholder: "Your guess", style:"width:500px;"%></div>
+        <div style="margin:10px;"><%= f.submit "Submit guess" %></div>
+    <% end %>
+</div>
+<%= link_to "GIVE UP", quit_game_path, data:{'turbo-method' => :post},class:"no-underline rounded-full bg-white px-4 py-2 font-bold", style:"text-decoration: none !important;" %>
