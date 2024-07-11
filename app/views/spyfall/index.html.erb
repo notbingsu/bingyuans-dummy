@@ -1,14 +1,19 @@
-<div class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center;">
-    <h1 style="color:white;font-size:100px; font-family: 'Lemon Mocktail', sans-serif; margin:10px auto;">SPYFALLIO</h1>
-    <div style="margin: 0px auto;">
-        <% if not @in_game  %>
-            <%= link_to "START", start_game_path,  data: { 'turbo-method' => :post }, class:"no-underline rounded-full bg-white px-4 py-2 font-bold ", style:"text-decoration: none !important;" %>
-        <% end %>    
+<div class = "h-full">
+    <div class="fixed top-5 left-5">
+        <%= link_to "X", root_path, class:"font-black ",style:"color:white;text-decoration:none;"%>
     </div>
-    <div class="my-2">
-        <p class = "min-h-4"style="color:white;"><%= @message %></p>
-        <% if @in_game %>
-            <%= render "layouts/gameplay" %>
-        <% end %>
+    <div class="container h-full" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+        <h1 style="color:white;font-size:100px; font-family: 'Lemon Mocktail', sans-serif; margin:10px auto;">SPYFALLIO</h1>
+        <div style="margin: 0px auto;">
+            <% if not @in_game  %>
+                <%= link_to "START", start_game_path,  data: { 'turbo-method' => :post }, class:"rounded-full bg-slate-800 px-4 py-2 font-bold tracking-wider", style:"color:white;text-decoration: none !important;" %>
+            <% end %>    
+        </div>
+        <div class="my-2">
+            <p class = "min-h-4"style="color:white;"><%= @message %></p>
+            <% if @in_game %>
+                <%= render "layouts/gameplay" %>
+            <% end %>
+        </div>
     </div>
 </div>
