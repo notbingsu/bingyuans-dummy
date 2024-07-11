@@ -1,4 +1,15 @@
-require_relative 'common_occupations'
+# == Schema Information
+#
+# Table name: games
+#
+#  id         :bigint           not null, primary key
+#  in_game    :boolean
+#  occupation :string
+#  log        :text
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+require_relative '../common_occupations'
 class Game < ApplicationRecord
   before_create :set_occupation
   def set_occupation

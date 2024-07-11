@@ -75,3 +75,5 @@ end
 gem "langchainrb", "~> 0.13.5"
 
 gem "tailwindcss-rails", "~> 2.6"
+
+gem "annotate"

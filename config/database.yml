@@ -3,7 +3,14 @@ development:
   encoding: unicode
   database: dummy_development
   pool: 5
+
 production:
   adapter: postgresql
   prepared_statements: false
   advisory_locks: false
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: dummy_test
+  pool: 5
