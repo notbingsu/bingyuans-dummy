@@ -1,6 +1,5 @@
 class SpyfallController < ApplicationController
-  before_action :create_game, only: [:index, :start_game, :make_guess, :quit_game]
-
+  before_action :create_game, only: [:index, :start_game, :make_guess]
   def index
     @in_game = @game.in_game
     @message = params[:message]
@@ -13,15 +12,14 @@ class SpyfallController < ApplicationController
   end
 
   def quit_game
-    @game.in_game = false
-    @game.save
+    Game.destroy_all
     redirect_to spyfall_index_path
   end
 
   def make_guess
     if @game.validate_guess(params[:guess])
-      @game.in_game = false
-      @game.save
+      @message = "CONGRATULATIONS, I AM A #{@game.occupation}!"
+      Game.destroy_all
       redirect_to spyfall_index_path(message: "CONGRATULATIONS, I AM A #{@game.occupation.upcase}!")
     else
       @response = guess_query(params[:guess])
@@ -55,6 +53,6 @@ class SpyfallController < ApplicationController
   end
 
   def create_game
-    @game = Game.first_or_create(in_game: false)
+    @game = Game.first_or_create(in_game: false, occupation: "doctor")
   end
 end
