@@ -1,28 +1,39 @@
 class SpyfallController < ApplicationController
-  before_action :create_game, only: [:index, :start_game, :make_guess]
+  before_action :create_game, only: [:index, :start_game, :make_guess, :quit_game]
+
+  INSTRUCTIONS = "SPYFALLIO, your task is to guess my occupation. You may enter yes/no questions to guess my occupation."
+
   def index
+    Rails.logger.info(@game.occupation)
+    Rails.logger.info(@game.in_game)
+    Rails.logger.info(Game.count)
     @in_game = @game.in_game
     @message = params[:message]
+    if @message.nil?
+      @message = INSTRUCTIONS
+    end
   end
 
   def start_game
     @game.in_game = true
     @game.save
-    redirect_to spyfall_index_path
+    redirect_to spyfall_index_path(message: "Enter your questions here")
   end
 
   def quit_game
-    Game.destroy_all
+    @game.delete_game
     redirect_to spyfall_index_path
   end
 
   def make_guess
+    @game.add_to_log(params[:guess])
     if @game.validate_guess(params[:guess])
       @message = "CONGRATULATIONS, I AM A #{@game.occupation}!"
-      Game.destroy_all
+      @game.delete_game
       redirect_to spyfall_index_path(message: "CONGRATULATIONS, I AM A #{@game.occupation.upcase}!")
     else
       @response = guess_query(params[:guess])
+      @game.add_to_log(@response)
       redirect_to spyfall_index_path(message: "#{@response}")
     end
   end
@@ -53,6 +64,6 @@ class SpyfallController < ApplicationController
   end
 
   def create_game
-    @game = Game.first_or_create(in_game: false, occupation: "doctor")
+    @game = Game.first_or_create(in_game: false)
   end
 end

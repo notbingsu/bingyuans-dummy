@@ -1,7 +1,17 @@
-<div class="grid grid-cols-1 gap-4 content-between" >
-    <%= form_with url: make_guess_path do |f| %>
-        <div style="margin:10px;"><%= f.text_field :guess, placeholder: "Your guess", style:"width:500px;"%></div>
-        <div style="margin:10px;"><%= f.submit "Submit guess" %></div>
-    <% end %>
-</div>
-<%= link_to "GIVE UP", quit_game_path, data:{'turbo-method' => :post},class:"no-underline rounded-full bg-white px-4 py-2 font-bold", style:"color:black;text-decoration: none !important;" %>
+ 
+    <div class="grid grid-cols-1 gap-4 content-between" >
+        <div>
+            <form action="<%= make_guess_path %>" method="post">
+                <div style="margin:10px;">
+                    <input type="text" name="guess" placeholder="Your guess" class = "rounded-full "style="width:500px;">
+                </div>
+                <div style="margin:10px;">
+                    <button type="submit" class="no-underline rounded-full bg-white px-4 py-2 font-bold">SUBMIT</button>
+                    <%= link_to "GIVE UP", quit_game_path, data:{'turbo-method' => :post},class:"no-underline rounded-full bg-white px-4 py-2.5 font-bold", style:"color:black;text-decoration: none !important;" %>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+        <%= render "layouts/gamelog" %>
+    </div>

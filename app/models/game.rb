@@ -11,20 +11,33 @@
 #
 require_relative '../common_occupations'
 class Game < ApplicationRecord
-  before_create :set_occupation
+  before_create :set_occupation, :set_log
+
   def set_occupation
     self.occupation = common_occupations.sample
   end
 
+  def set_log
+    self.log = ""
+  end
+
   def validate_guess(guess)
     guess = guess.downcase
-    Rails.logger.info(self.occupation)
-    Rails.logger.info("Guess: #{guess}")
     if guess.include? self.occupation
       self.in_game = false
       return true
     else
       return false
     end
+  end
+
+  def delete_game
+    self.destroy
+  end
+
+  def add_to_log(message)
+    self.log ||= ""
+    self.log += message + "\n"
+    self.save
   end
 end
